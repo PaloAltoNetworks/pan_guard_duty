@@ -316,8 +316,11 @@ def handle_security_rule(device, rule_name, description, source_zone,
 def lambda_handler(event, context):
 
     print("[Lambda handler]Received event: " + json.dumps(event, indent=2))
+    fw_ip = os.environ['FWIP']
+    username = os.environ['USERNAME']
+    password = os.environ['PASSWORD']
     print("Establish a connection with the firewall")
-    fw = firewall.Firewall('23.22.247.122', 'admin', 'paloalto')
+    fw = firewall.Firewall(fw_ip, username, password)
 
     group_name='pan_gd_dag'
     print("Process threat intelligence.")
